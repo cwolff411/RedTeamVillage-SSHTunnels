@@ -1,0 +1,20 @@
+# ---------------------------------------------------- #
+#                                                      #
+#   Service meant for use with systemd                 #
+#   Local port 443 to remote 54321 using autossh       #
+#                                                      #
+#      Written by: Cory Wolff                          #
+#                                                      #
+# ---------------------------------------------------- #
+
+[Unit]
+Description=ssh tunnel to remotely access the device using a remote port forward
+After=network.target
+
+[Service]
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -N -R 54321:localhost:443 root@YOUR_HOST -i ~/.ssh/id_rsa
+User=YOUR_USER
+
+[Install]
+WantedBy=multi-user.target
